@@ -8,8 +8,10 @@ send_alert() {
     echo "$(tput setaf 1)ALERT: $1 usage is at $2%$(tput sgr0)"
 }
 
-cpu_usage=$(top -bn1 | grep "Cpu(s)"| awk '{print $2 + $4}')
-cpu_usage=${cpu_usage%.*}
+cpu_idle=$(top -bn1 | grep "Cpu(s)" | grep -Po '(\d+\.\d+)\s+id' | awk '{print $1}')
+cpu_usage=$(echo "100 - $cpu_idle" | bc)
+echo "CPU Usage: $cpu_usage%"
+
 
 echo "Current CPU Usage: $cpu_usage%"
 if ((cpu_usage >= CPU_THRESHOLD)); then

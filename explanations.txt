@@ -1,3 +1,24 @@
+linux file path:
+/proc → Virtual filesystem with real-time system info (not stored on disk).
+/proc/stat → CPU statistics since boot (user, system, idle ticks, etc.).
+/proc/meminfo → Memory stats (total, free, available, buffers).
+/proc/[pid]/ → Info about each running process (pid = process ID).
+/proc/uptime → System uptime and idle time.
+/proc/net/dev → Network interface stats.
+
+commands:
+
+top → Real-time process monitor (CPU, memory, processes).
+free → Snapshot of system memory usage.
+df → Disk space usage for mounted filesystems.
+cat → Print file contents to terminal.
+grep → Search text with patterns/regex.
+awk → Text processing tool (split lines into fields $1, $2...).
+sed → Stream editor for substitutions/edits.
+ps → Show processes (ps aux = all processes with details).
+bc → Command-line calculator (arbitrary precision).
+
+
 1. Using grep -Po '(\d+\.\d+)\s+id'
 cpu_idle=$(top -bn1 | grep "Cpu(s)" | grep -Po '(\d+\.\d+)\s+id' | awk '{print $1}')
 cpu_usage=$(echo "100 - $cpu_idle" | bc)
