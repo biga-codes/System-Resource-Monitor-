@@ -7,6 +7,18 @@ send_alert() {
     echo "$(tput setaf 1)ALERT: $1 usage is at $2%$(tput sgr0)"
 }
 
+#arg 1 and 2
+send_alert() {
+    echo "$(tput setaf 1)ALERT: $1 usage is at $2%$(tput sgr0)"
+}
+
+cpu_usage=($ top -bn1 | grep"Cpu(s)"| awk '{print $2 + $4}')
+cpu_usage=${cpu_usage%.*}
+
+echo "Current CPU Usage: $cpu_usage%"
+if(cpu_usage>=$CPU_THRESHOLD); then
+    send_alert "CPU" "$cpu_usage"
+fi
 
 
 #gopik@DESKTOP-FQBHU0J MINGW64 ~/OneDrive/Desktop/c++
