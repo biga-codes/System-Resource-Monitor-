@@ -1,4 +1,6 @@
 #System Resource Monitor with Email Alerts via mailutils- (using SMTP (Gmail/Ubuntu) config )
+ 
+ 
  The project includes implementations in Bash, Python, and C++ for cross-platform demonstration and learning purposes.  
  
  Bash script: Monitors system resources on Unix-like systems and prints colored alerts.
