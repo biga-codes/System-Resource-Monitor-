@@ -16,8 +16,7 @@ The script sends **email alerts** when any of these resources exceed predefined 
 This project was part of my **exploration of Linux command-line tools, Bash scripting, and basic email notifications using mailutils and SMTP**.  
 
 
-This is a simple Bash-based system resource monitoring script that tracks CPU, memory, and disk usage on a Linux system (tested on Ubuntu/WSL)
-The script sends email alerts when any of these resources exceed predefined thresholds.
+
 
 ## About  
 
