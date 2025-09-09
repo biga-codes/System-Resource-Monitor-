@@ -14,7 +14,7 @@ The script sends email alerts when any of these resources exceed predefined thre
 
 The project was a part of my exploration of Linux command-line tools, Bash scripting, and basic email notifications using mailutils and SMTP
 
-#Functionailties:
+## Functionailties:
 Used Bash scripting to automate monitoring of system resources.
 Linux commands used:
 
@@ -28,7 +28,7 @@ df → to check disk usage of the root filesystem.
 -Each alert includes a timestamp to show when the resource exceeded its threshold.
 -Implemented threshold checks for CPU, memory, and disk, and triggered alerts when thresholds were exceeded.
 
- #command line
+ ## command line
  <img width="1876" height="792" alt="Screenshot 2025-09-09 140534" src="https://github.com/user-attachments/assets/59e8dc4f-189b-45b0-a45d-9aa95d015c7c" />
 
 #demo
