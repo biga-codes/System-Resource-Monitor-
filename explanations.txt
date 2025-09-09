@@ -1,0 +1,22 @@
+awk '/Mem/ {printf("%3.1f", ($3/$2) * 100)}'
+
+free: Provides memory usage stats.
+awk '/Mem/ {printf("%3.1f", ($3/$2) * 100)}': Calculates the percentage of memory in use by dividing used memory ($3) by total memory ($2).
+The script compares memory_usage with the threshold and sends an alert if necessary.
+
+
+This awk command is used to calculate and display the memory usage percentage from the output of a command like free or /proc/meminfo. 
+
+Pattern Matching:
+
+/Mem/
+This part searches for lines containing "Mem", typically representing memory statistics.
+Calculation:
+
+{printf("%3.1f", ($3/$2) * 100)}
+$3 refers to the used memory (from the matched line).
+$2 refers to the total memory.
+The expression ($3/$2) * 100 calculates the percentage of used memory.
+Output Formatting:
+
+printf("%3.1f", ...) formats the output to one decimal place.
