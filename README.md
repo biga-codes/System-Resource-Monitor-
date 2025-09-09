@@ -1,11 +1,11 @@
-# system_monitor
+#System Resource Monitor with Email Alerts via mailutils- (using SMTP (Gmail/Ubuntu) config )
  The project includes implementations in Bash, Python, and C++ for cross-platform demonstration and learning purposes.  
  
  Bash script: Monitors system resources on Unix-like systems and prints colored alerts.
  Python script: (To be implemented) Monitors system resources using standard libraries, works on Windows and Linux.
  C++ program: (To be implemented) Monitors system resources using platform-specific APIs. Usage: Each script checks CPU, memory, and disk usage, and   prints an alert if any resource exceeds its threshold.
 
-#System Resource Monitor with Email Alerts
+
 
 This is a simple Bash-based system resource monitoring script that tracks CPU, memory, and disk usage on a Linux system (tested on Ubuntu/WSL)
 The script sends email alerts when any of these resources exceed predefined thresholds.
