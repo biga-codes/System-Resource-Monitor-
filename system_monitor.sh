@@ -3,7 +3,7 @@ CPU_THRESHOLD=8
 MEMORY_THRESHOLD=8 
 DISK_THRESHOLD=9
 #testmail
-EMAIL=ralphiwreckit@gmail.com
+EMAIL=yourmail@gmail.com
 #arg 1 and 2
 ALERTS=()
 send_alert() {
