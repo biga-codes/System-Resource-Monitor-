@@ -16,7 +16,30 @@ Calculation:
 {printf("%3.1f", ($3/$2) * 100)}
 $3 refers to the used memory (from the matched line).
 $2 refers to the total memory.
-The expression ($3/$2) * 100 calculates the percentage of used memory.
+The expression ($3/$2) * 100 
 Output Formatting:
 
-printf("%3.1f", ...) formats the output to one decimal place.
+printf("%3.1f", ...) 
+
+top -bn1: Runs top in batch mode for one iteration.
+grep "Cpu(s)": Filters the output to find the line containing CPU usage.
+awk '{print $2 + $4}': Extracts the idle and iowait percentages (2nd and 4th columns) and sums them to get the total CPU usage.
+
+Monitor Disk Usage:
+#-h / for root file
+disk_usage=$(df -h | awk '/\// {print $(NF-1)}')
+df -h /: Displays disk space usage for the root filesystem in a human-readable format.
+awk '/\// {print $(NF-1)}': Filters the output to find the line containing the filesystem information and extracts the second-to-last field, which represents the used percentage.
+Remove the Percentage Sign:
+
+disk_usage=${disk_usage%?} # Remove the % sign
+
+echo "Current disk usage: $disk_usage%"
+Outputs the current disk usage percentage.
+Check Against Threshold:
+
+if ((disk_usage >= DISK_THRESHOLD)); then
+  send_alert "Disk" "$disk_usage"
+fi
+Compares the current disk usage to a predefined threshold (DISK_THRESHOLD).
+If the usage exceeds the threshold, it triggers an alert using the send_alert function.
