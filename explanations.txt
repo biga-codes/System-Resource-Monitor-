@@ -1,45 +1,69 @@
-awk '/Mem/ {printf("%3.1f", ($3/$2) * 100)}'
+1. Using grep -Po '(\d+\.\d+)\s+id'
+cpu_idle=$(top -bn1 | grep "Cpu(s)" | grep -Po '(\d+\.\d+)\s+id' | awk '{print $1}')
+cpu_usage=$(echo "100 - $cpu_idle" | bc)
+echo "CPU Usage: $cpu_usage%"
 
-free: Provides memory usage stats.
-awk '/Mem/ {printf("%3.1f", ($3/$2) * 100)}': Calculates the percentage of memory in use by dividing used memory ($3) by total memory ($2).
-The script compares memory_usage with the threshold and sends an alert if necessary.
+Explanation:
+
+grep -Po → Perl regex mode.
+digit+.digit+ space
+
+(\d+\.\d+)\s+id → capture the floating-point number before id (the idle %).
+
+Example: 
+
+%Cpu(s):  3.0 us,  1.0 sy,  0.0 ni, 95.0 id,  1.0 wa
+it extracts 95.0 id → keeps 95.0.
+Then: 100 - idle = usage.
+
+2.Disk (df /)
+
+Raw output looks like:
+
+Filesystem     1K-blocks    Used Available Use% Mounted on
+/dev/sda1      488281250 3000000 188281250  67% /
 
 
-This awk command is used to calculate and display the memory usage percentage from the output of a command like free or /proc/meminfo. 
+NR==2 → second line only
+$5 = Use% → 67%
+Strip % → 67
+Script prints: 67% Disk usage
 
-Pattern Matching:
+3. 1. CPU (top -bn1 | grep "Cpu(s)")
 
-/Mem/
-This part searches for lines containing "Mem", typically representing memory statistics.
-Calculation:
+Raw output looks like:
 
-{printf("%3.1f", ($3/$2) * 100)}
-$3 refers to the used memory (from the matched line).
-$2 refers to the total memory.
-The expression ($3/$2) * 100 
-Output Formatting:
+%Cpu(s):  3.0 us,  1.0 sy,  0.0 ni, 95.0 id,  1.0 wa,  0.0 hi,  0.0 si,  0.0 st
 
-printf("%3.1f", ...) 
 
-top -bn1: Runs top in batch mode for one iteration.
-grep "Cpu(s)": Filters the output to find the line containing CPU usage.
-awk '{print $2 + $4}': Extracts the idle and iowait percentages (2nd and 4th columns) and sums them to get the total CPU usage.
+us = user space %
 
-Monitor Disk Usage:
-#-h / for root file
-disk_usage=$(df -h | awk '/\// {print $(NF-1)}')
-df -h /: Displays disk space usage for the root filesystem in a human-readable format.
-awk '/\// {print $(NF-1)}': Filters the output to find the line containing the filesystem information and extracts the second-to-last field, which represents the used percentage.
-Remove the Percentage Sign:
+sy = system (kernel) %
 
-disk_usage=${disk_usage%?} # Remove the % sign
+ni = nice (low-priority) %
 
-echo "Current disk usage: $disk_usage%"
-Outputs the current disk usage percentage.
-Check Against Threshold:
+id = idle % ← we grab this
 
-if ((disk_usage >= DISK_THRESHOLD)); then
-  send_alert "Disk" "$disk_usage"
-fi
-Compares the current disk usage to a predefined threshold (DISK_THRESHOLD).
-If the usage exceeds the threshold, it triggers an alert using the send_alert function.
+wa = waiting for I/O %
+
+hi = hardware interrupts %
+
+si = software interrupts %
+
+st = stolen by hypervisor %
+
+Script does: 100 − 95.0 (idle) = 5% CPU usage
+
+4. Memory (free)
+
+Raw output looks like:
+
+              total        used        free      shared  buff/cache   available
+Mem:        16000000     4000000     2000000      500000     1000000    11000000
+Swap:        2000000           0     2000000
+
+
+$2 = total = 16000000 KB
+$3 = used = 4000000 KB
+
+Formula → (4000000 ÷ 16000000) × 100 = 25%

@@ -25,7 +25,8 @@ if ((mem_usage>=$MEMORY_THRESHOLD)); then
 fi
 
 #only for root fs
-disk_usage=$(df -h| awk "/\// {print $NF-1}")
+# disk_usage=$(df -h| awk "/\// {print $NF-1}") deprecated
+disk_usage=$(df / | awk 'NR==2 {gsub("%","",$5); print $5}')
 disk_usage=${disk_usage%.*}
 echo "Current Disk Usage: $disk_usage%"
 if ((disk_usage>=$DISK_THRESHOLD)); then
