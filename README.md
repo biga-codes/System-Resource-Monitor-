@@ -1,4 +1,4 @@
-#System Resource Monitor with Email Alerts via mailutils- (using SMTP (Gmail/Ubuntu) config )
+# System Monitoring in Bash with Email Alerts (Configured with Mailutils and SMTP on Ubuntu/WSL)
  
  
  The project includes implementations in Bash, Python, and C++ for cross-platform demonstration and learning purposes.  
