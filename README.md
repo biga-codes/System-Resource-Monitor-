@@ -23,9 +23,13 @@ free → to calculate memory usage percentage.
 df → to check disk usage of the root filesystem.
 
 -Configured the script to send alert messages via email using SMTP.
+
 -Set up mailutils to work with a Gmail account (or any SMTP server), which required specifying the email address, server, and authentication.
+
 -Learned how the script interacts with the SMTP server to deliver emails from the command line.
+
 -Each alert includes a timestamp to show when the resource exceeded its threshold.
+
 -Implemented threshold checks for CPU, memory, and disk, and triggered alerts when thresholds were exceeded.
 
  ## command line
