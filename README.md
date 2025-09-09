@@ -1,36 +1,49 @@
 # System Monitoring in Bash with Email Alerts (Configured with Mailutils and SMTP on Ubuntu/WSL)
  
  
- The project includes implementations in Bash, Python, and C++ for cross-platform demonstration and learning purposes.  
- 
- Bash script: Monitors system resources on Unix-like systems and prints colored alerts.
- Python script: (To be implemented) Monitors system resources using standard libraries, works on Windows and Linux.
- C++ program: (To be implemented) Monitors system resources using platform-specific APIs. Usage: Each script checks CPU, memory, and disk usage, and   prints an alert if any resource exceeds its threshold.
+The project includes implementations in **Bash**, **Python**, and **C++** for cross-platform demonstration and learning purposes.  
 
+- **Bash script (working)**: Monitors system resources on Unix-like systems and prints colored alerts. Also sends email notifications when thresholds are exceeded.  
+- **Python script (planned)**: Will monitor system resources using standard libraries, cross-platform (Windows and Linux).  
+- **C++ program (planned)**: Will monitor system resources using platform-specific APIs.  
+
+## About  
+
+This is a simple **Bash-based system resource monitoring script** that tracks CPU, memory, and disk usage on a Linux system (tested on Ubuntu/WSL).  
+
+The script sends **email alerts** when any of these resources exceed predefined thresholds.  
+
+This project was part of my **exploration of Linux command-line tools, Bash scripting, and basic email notifications using mailutils and SMTP**.  
 
 
 This is a simple Bash-based system resource monitoring script that tracks CPU, memory, and disk usage on a Linux system (tested on Ubuntu/WSL)
 The script sends email alerts when any of these resources exceed predefined thresholds.
 
-The project was a part of my exploration of Linux command-line tools, Bash scripting, and basic email notifications using mailutils and SMTP
+## About  
 
-## Functionailties:
-Used Bash scripting to automate monitoring of system resources.
-Linux commands used:
+This is a simple **Bash-based system resource monitoring script** that tracks CPU, memory, and disk usage on a Linux system (tested on Ubuntu/WSL).  
 
-top → to calculate CPU usage.
-free → to calculate memory usage percentage.
-df → to check disk usage of the root filesystem.
+The script sends **email alerts** when any of these resources exceed predefined thresholds.  
 
--Configured the script to send alert messages via email using SMTP.
+This project was part of my **exploration of Linux command-line tools, Bash scripting, and basic email notifications using mailutils and SMTP**.  
 
--Set up mailutils to work with a Gmail account (or any SMTP server), which required specifying the email address, server, and authentication.
+---
 
--Learned how the script interacts with the SMTP server to deliver emails from the command line.
+## Features 
 
--Each alert includes a timestamp to show when the resource exceeded its threshold.
+- **Bash scripting** to automate monitoring of system resources.  
+- **Linux commands used**:  
+  - `top` → calculate CPU usage.  
+  - `free` → calculate memory usage percentage.  
+  - `df` → check disk usage of the root filesystem.  
+- **Configured Mailutils** to send alert messages via **SMTP**.  
+- Set up Mailutils to work with a Gmail account (or any SMTP server): required email address, server, and authentication.  
+- script interaction with **SMTP server** to deliver emails from the command line.  
+- Added **timestamps** to alerts for tracking.  
+- Implemented **threshold checks** for CPU, memory, and disk usage.  
+ 
 
--Implemented threshold checks for CPU, memory, and disk, and triggered alerts when thresholds were exceeded.
+---
 
  ## command line
  <img width="1876" height="792" alt="Screenshot 2025-09-09 140534" src="https://github.com/user-attachments/assets/59e8dc4f-189b-45b0-a45d-9aa95d015c7c" />
